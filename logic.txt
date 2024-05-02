@@ -1,0 +1,20 @@
+1. **Iterating Through Rows**:
+   It iterates through each row in the DataFrame `df_store_polls`.
+
+2. **Processing Active Status**:
+   - If the 'status' is 'active', it checks if `active_start_time` is not None, which indicates the start of an active period.
+   - It checks conditions based on whether the store is in business hours (`business_hours_data['business_hour'] == True`) and whether uptime for the hour, day, and week should be considered (`consider_hour_uptime`, `consider_day_uptime`, `consider_week_uptime`).
+   - It calculates the uptime minutes for each time interval (hour, day, week) based on the current time and the timestamp of the active period.
+   - It updates the `active_start_time` for the next active period.
+
+3. **Processing Inactive Status**:
+   - If the 'status' is not 'active', it resets `active_start_time` for the next active period.
+
+4. **Handling Conditions**:
+   - Conditions are checked to ensure that uptime is calculated within the appropriate time intervals and under specific circumstances.
+   - If uptime exceeds the maximum duration allowed for a time interval, the corresponding flag (`consider_hour_uptime`, `consider_day_uptime`, `consider_week_uptime`) is set to False to stop further uptime calculation for that interval.
+
+5. **Breaking Loop**:
+   - If any of the uptime conditions are not met, the loop breaks, indicating that uptime calculation is completed.
+
+This code calculates uptime durations for different time intervals while considering various conditions related to business hours and the current time.
